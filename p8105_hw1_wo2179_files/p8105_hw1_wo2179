@@ -61,7 +61,6 @@ However, I Was unable to convert the character variables to numeric values
 directly
 
 ### d. Convert music_logical to Num and factor 
-
 ```{r music_convert_factor, warning = FALSE}
   
   as.numeric(pull(music_df, music_logical)) * pull(music_df, music_num)
