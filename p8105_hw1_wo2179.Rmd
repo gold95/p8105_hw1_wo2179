@@ -29,7 +29,7 @@ library(tidyverse)
 ```
 ### b. Mean of each variable in music_df
 
-```{r mean_music_pull_var}
+```{r mean_music_pull_var, message = FALSE, warning = FALSE}
 
   mean(pull(music_df, music_num))
 
@@ -42,8 +42,11 @@ library(tidyverse)
 ```
 I can't take the mean of the Character and factor variables
 
+Only the means of numerical and logical variables can be taken
 
-```{r convert_numeric, message = FALSE }
+### c. Use as.numeric function
+
+```{r music_convert_num, message = FALSE, results = 'hide', warning = FALSE}
   
   as.numeric(pull(music_df, music_logical))
   
@@ -52,8 +55,13 @@ I can't take the mean of the Character and factor variables
   as.numeric(pull(music_df, music_factor))
   
 ```
+I am able to convert the logical and factor variables to numeric values
 
-```{r}
+However, I Was unable to convert the character variables to numeric values
+directly
+
+### d. Convert music_logical to Num and factor 
+```{r music_convert_factor, warning = FALSE}
   
   as.numeric(pull(music_df, music_logical)) * pull(music_df, music_num)
   
@@ -62,5 +70,62 @@ I can't take the mean of the Character and factor variables
   as.numeric(as.factor(pull(music_df, music_logical))) * pull(music_df, music_num)
 ```
 
+
+## Problem 2
+
+### a. Install palmerpenguins and describe data set
+
+```{r penguins_dataset}
+  
+  data("penguins", package = "palmerpenguins")
+  
+```
+
+```{r summary_penguin_var, include = FALSE}
+  sum_species = summary(pull(penguins, species))
+
+  sum_body_mass = summary(pull(penguins, body_mass_g )) 
+  
+  sum_bill_len = summary(pull(penguins, bill_length_mm ))
+  
+  sum_bill_dep = summary(pull(penguins, bill_depth_mm ))
+  
+  sum_flip = summary(pull(penguins, flipper_length_mm ))
+  
+```
+
+
+This data set contains the `r names(penguins)` (of data collection) of `r nrow (penguins)` penguins.
+
+The 3 species used in this data set were: `r names (sum_species)` and they were `r 
+
+sum_species` respectively. The average body mass in grams of these penguins was `r 
+
+round (sum_body_mass [4], digits = 2)`, the average bill length in mm of these penguins was `r 
+
+round (sum_bill_len [4], digits = 2)`, the average bill depth in mm of these penguins was `r 
+
+round (sum_bill_dep [4], digits = 2)`, and the average flipper length in mm of these penguins was `r 
+
+round (sum_flip [4], digits = 2 )`.  In this data set there were `r nrow (penguins)` rows and `r 
+
+ncol (penguins)` columns. 
+
+
+### b. Plot flipper length against bill length
+
+```{r Penguin_plot, warning = FALSE}
+
+  ggplot(
+    
+    penguins, 
+    
+    aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + 
+    
+  geom_point(shape = 16) + ggtitle("Comparison of Flipper and bill lengths in 3 species of Penguins")
+
+  ggsave("penguins.pdf")
+
+```
 
 
