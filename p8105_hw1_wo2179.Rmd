@@ -1,0 +1,66 @@
+---
+title: "HomeWork 1"
+author: "Wuraola Olawole"
+date: "9/15/2020"
+output: github_document
+---
+
+## Problem 1
+
+### a. Create Data frame
+
+```{r music_data_frame, message = FALSE}
+
+library(tidyverse)
+
+  music_df =
+    
+    tibble(
+      
+      music_num = rnorm(10),
+              
+      music_logical = music_num > 0,
+              
+      music_char = c("doh", "reh", "mi", "fah","soh", "lah", "ti", "d#", "r#", "f#" ),
+              
+      music_factor = factor(c("low", "low", "low", "mod", "mod", "mod", "high", "high", "high", "high"))
+)
+
+```
+### b. Mean of each variable in music_df
+
+```{r mean_music_pull_var}
+
+  mean(pull(music_df, music_num))
+
+  mean(pull(music_df, music_logical))
+  
+  mean(pull(music_df, music_char))
+  
+  mean(pull(music_df, music_factor))
+
+```
+I can't take the mean of the Character and factor variables
+
+
+```{r convert_numeric, message = FALSE }
+  
+  as.numeric(pull(music_df, music_logical))
+  
+  as.numeric(pull(music_df, music_char))
+  
+  as.numeric(pull(music_df, music_factor))
+  
+```
+
+```{r}
+  
+  as.numeric(pull(music_df, music_logical)) * pull(music_df, music_num)
+  
+  as.factor(pull(music_df, music_logical)) * pull(music_df, music_num)
+  
+  as.numeric(as.factor(pull(music_df, music_logical))) * pull(music_df, music_num)
+```
+
+
+
